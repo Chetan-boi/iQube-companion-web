@@ -1,0 +1,10 @@
+---
+// A one-line shell command with a copy button.
+interface Props { cmd: string; label?: string }
+const { cmd, label } = Astro.props;
+---
+<div class="code">
+  {label && <span class="code-label">{label}</span>}
+  <pre><code>{cmd}</code></pre>
+  <button class="copy" type="button" data-copy={cmd} aria-label="Copy command">Copy</button>
+</div>

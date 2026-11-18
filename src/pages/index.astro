@@ -1,0 +1,458 @@
+---
+import "../styles/global.css";
+import { site } from "../data/site";
+import Shot from "../components/Shot.astro";
+import Code from "../components/Code.astro";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{site.name} — {site.tagline}</title>
+    <meta name="description" content={site.description} />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+    <meta property="og:title" content={`${site.name} — ${site.tagline}`} />
+    <meta property="og:description" content={site.description} />
+    <meta property="og:image" content="/images/widget-medium-dark.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  </head>
+
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <!-- Unofficial notice: always visible at the very top -->
+    <div class="notice-bar" role="note">
+      <span><strong>Unofficial.</strong> Not affiliated with or endorsed by TVS Motor Company.</span>
+      <a href="#disclaimer">Read the disclaimer</a>
+    </div>
+
+    <header class="nav">
+      <div class="wrap nav-inner">
+        <a href="#top" class="brand" aria-label={`${site.name} home`}>
+          <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="/images/logo-dark.png" />
+            <img src="/images/logo-light.png" alt="" width="28" height="28" />
+          </picture>
+          <span>{site.name}</span>
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#features">Features</a>
+          <a href="#setup">Setup</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#disclaimer">Disclaimer</a>
+        </nav>
+        <button class="btn btn-small" type="button" data-open-download>Download</button>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- HERO -->
+      <section class="hero" id="top">
+        <div class="wrap hero-inner">
+          <picture class="hero-logo">
+            <source media="(prefers-color-scheme: dark)" srcset="/images/logo-dark.png" />
+            <img src="/images/logo-light.png" alt={`${site.name} app icon`} width="112" height="112" />
+          </picture>
+          <p class="eyebrow">Free &middot; {site.license} licensed &middot; macOS 14+</p>
+          <h1>Your scooter,<br />on your desktop.</h1>
+          <p class="lede">
+            {site.name} is a native menu-bar app and widget for TVS electric scooters.
+            Battery, charging and range, live and at a glance — without reaching for your phone.
+          </p>
+          <div class="cta-row">
+            <button class="btn btn-primary" type="button" data-open-download>
+              <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M16.4 12.6c0-2.4 2-3.5 2.1-3.6-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.3 1.2 9.7.8 1.2 1.8 2.5 3 2.4 1.2 0 1.7-.8 3.1-.8s1.9.8 3.2.8c1.3 0 2.1-1.2 2.9-2.4.9-1.3 1.3-2.7 1.3-2.7s-2.4-.9-2.4-4zM14 5.4c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/></svg>
+              Download for Mac
+            </button>
+            <a class="btn btn-ghost" href="#setup">Setup guide</a>
+          </div>
+          <p class="meta">Version {site.version} &middot; {site.dmgSize} &middot; {site.minMacOS}</p>
+        </div>
+
+        <div class="wrap">
+          <div class="desk" role="img" aria-label="The iQube Companion widget and menu-bar panel on a Mac desktop">
+            <div class="desk-menubar">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="desk-status">
+                <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>
+                75%
+              </span>
+            </div>
+            <div class="desk-stage">
+              <Shot name="widget-medium" alt="" width={388} class="desk-medium" eager />
+              <Shot name="widget-small" alt="" width={194} class="desk-small" eager />
+              <Shot name="menu" alt="" width={340} class="desk-menu" eager />
+            </div>
+          </div>
+          <p class="caption">Real readings from a TVS Orbiter while charging.</p>
+        </div>
+      </section>
+
+      <!-- BENTO -->
+      <section class="section" id="features" aria-labelledby="features-title">
+        <div class="wrap">
+          <p class="kicker">Features</p>
+          <h2 id="features-title">Everything the app shows.<br /><span class="muted">Right where you work.</span></h2>
+
+          <div class="bento">
+            <article class="tile tile-hero">
+              <div class="tile-copy">
+                <h3>Live, every five seconds.</h3>
+                <p>While your scooter is awake, readings stream in over the same live feed the official app uses. When it sleeps, the widget keeps the last known values and tells you when it last heard from it.</p>
+              </div>
+              <Shot name="widget-large" alt="Large widget showing battery, both packs, range and odometer" width={360} class="tile-shot" />
+            </article>
+
+            <article class="tile">
+              <span class="big">1&thinsp;h 55&thinsp;min</span>
+              <h3>Knows when you're charging.</h3>
+              <p>Time to full, straight from the scooter, and a nudge to unplug when it's done.</p>
+            </article>
+
+            <article class="tile">
+              <div class="ranges">
+                <div><span class="range-mode">Eco</span><span class="range-km">86<small>km</small></span></div>
+                <div><span class="range-mode">City</span><span class="range-km">73<small>km</small></span></div>
+              </div>
+              <h3>Range for every mode.</h3>
+              <p>Whatever riding modes your scooter reports, each with its own estimate.</p>
+            </article>
+
+            <article class="tile">
+              <div class="packs" aria-hidden="true">
+                <div class="pack"><span>A</span><i style="--v:75.4%"></i><b>75.4%</b></div>
+                <div class="pack"><span>B</span><i style="--v:74.7%"></i><b>74.7%</b></div>
+              </div>
+              <h3>Battery, pack by pack.</h3>
+              <p>Overall charge plus each removable pack, to one decimal place.</p>
+            </article>
+
+            <article class="tile">
+              <svg class="tile-icon" aria-hidden="true" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+              <h3>Private by design.</h3>
+              <p>Your session stays in the macOS Keychain. No analytics, no tracking, no servers of ours.</p>
+            </article>
+            <article class="tile tile-wide">
+              <div class="tile-copy">
+                <h3>Lives in your menu bar.</h3>
+                <p>Your charge level sits next to the clock. Click it for the full picture, reconnect, or open Settings. No Dock icon, no window to manage.</p>
+              </div>
+              <Shot name="menu" alt="Menu-bar panel with battery, packs and ranges" width={300} class="tile-shot" />
+            </article>
+
+            <article class="tile">
+              <div class="sizes" aria-hidden="true"><span class="sz s"></span><span class="sz m"></span><span class="sz l"></span></div>
+              <h3>Small, medium, large.</h3>
+              <p>Pick the size that fits your desktop or Notification Center.</p>
+            </article>
+
+            <article class="tile">
+              <div class="modes" aria-hidden="true"><span class="mode-light"></span><span class="mode-dark"></span></div>
+              <h3>Light and dark.</h3>
+              <p>Built with SwiftUI and WidgetKit. Follows your Mac's appearance automatically.</p>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- SETUP -->
+      <section class="section section-alt" id="setup" aria-labelledby="setup-title">
+        <div class="wrap narrow">
+          <p class="kicker">Setup guide</p>
+          <h2 id="setup-title">Up and running in about ten minutes.</h2>
+          <p class="section-lede">Everything you need, start to finish. You only do the phone part once every few months.</p>
+
+          <div class="need">
+            <h3>What you need</h3>
+            <ul>
+              <li>A Mac running {site.minMacOS}</li>
+              <li>An Android phone with the TVS Connect app, signed in to the account your scooter is registered to</li>
+              <li>A USB cable for the phone</li>
+              <li><a href="https://brew.sh" rel="noopener">Homebrew</a> on your Mac, to install Android's <code>adb</code> tool</li>
+            </ul>
+            <p class="fine">The session can only be read from the Android version of TVS Connect. The iPhone app cannot be used for this step.</p>
+          </div>
+
+          <ol class="steps">
+            <li class="step">
+              <h3>Download and install</h3>
+              <p>Download the DMG, open it, and drag <strong>{site.name}</strong> into your <strong>Applications</strong> folder.</p>
+              <p><button class="link-btn" type="button" data-open-download>Download {site.name} {site.version} ({site.dmgSize})</button></p>
+            </li>
+
+            <li class="step">
+              <h3>Open it the first time</h3>
+              <p>The app is free and not notarized by Apple, so macOS blocks it the first time you open it. This happens once:</p>
+              <ol class="sub">
+                <li>Open {site.name} from Applications. When macOS says it can't be opened, click <strong>Done</strong>.</li>
+                <li>Open <strong>System Settings &rsaquo; Privacy &amp; Security</strong>, scroll down, and click <strong>Open Anyway</strong> next to {site.name}.</li>
+                <li>Confirm with your password or Touch ID.</li>
+              </ol>
+              <p>A scooter icon appears in your menu bar. There is no Dock icon — the app lives in the menu bar.</p>
+            </li>
+
+            <li class="step">
+              <h3>Prepare your phone</h3>
+              <ol class="sub">
+                <li>On the phone, open <strong>Settings &rsaquo; About phone</strong> and tap <strong>Build number</strong> seven times to turn on Developer options.</li>
+                <li>Open <strong>Settings &rsaquo; System &rsaquo; Developer options</strong> and turn on <strong>USB debugging</strong>.</li>
+                <li>Connect the phone to your Mac and tap <strong>Allow</strong> when it asks to trust this computer.</li>
+              </ol>
+              <p>Install <code>adb</code> on your Mac and check the phone is listed as <code>device</code>:</p>
+              <Code cmd="brew install android-platform-tools" />
+              <Code cmd="adb devices" />
+            </li>
+
+            <li class="step">
+              <h3>Connect your TVS session</h3>
+              <p>
+                The helper script restarts TVS Connect on your phone, reads the four session values when the
+                dashboard loads, and saves them straight into {site.name}'s Keychain item — without ever showing
+                them on screen.
+              </p>
+              <p><a class="link-btn" href={site.sessionScript} download>Download get_token_session.sh</a></p>
+              <Code cmd="chmod +x ~/Downloads/get_token_session.sh && ~/Downloads/get_token_session.sh" />
+              <p>Keep the phone <strong>unlocked</strong> until the TVS Connect dashboard shows your battery level. Your charge appears in the menu bar a few seconds later.</p>
+
+              <details class="disclose">
+                <summary>Prefer to do it by hand?</summary>
+                <div class="disclose-body">
+                  <p>Capture the log while the TVS Connect dashboard loads (force-close the app first, then open it):</p>
+                  <Code cmd="adb logcat -c" />
+                  <Code cmd="adb logcat -d > ~/tvs-session.log" />
+                  <p>Then pull out each value:</p>
+                  <Code label="AccessToken" cmd="grep -m1 -oE 'AccessToken: eyJ[A-Za-z0-9._-]+' ~/tvs-session.log" />
+                  <Code label="RefreshToken" cmd="grep -m1 -oE 'RefreshToken: eyJ[A-Za-z0-9._-]+' ~/tvs-session.log" />
+                  <Code label="userid" cmd="grep -oE 'evUserId: [0-9]+' ~/tvs-session.log | tail -1" />
+                  <Code label="userVehicleid" cmd="grep -oE 'fetchingDataFor[^:]*: [0-9]+' ~/tvs-session.log | tail -1 | awk '{print $NF}'" />
+                  <p>Paste each value, without its label, into <strong>menu-bar icon &rsaquo; Settings &rsaquo; TVS session</strong> and click <strong>Save session</strong>. Then delete the log:</p>
+                  <Code cmd="rm ~/tvs-session.log && adb logcat -c" />
+                  <p class="fine">Use the <code>evUserId</code> number for userid. The log also has other UserId lines with different numbers.</p>
+                </div>
+              </details>
+            </li>
+
+            <li class="step">
+              <h3>Add the widget</h3>
+              <ol class="sub">
+                <li>Right-click an empty part of your desktop and choose <strong>Edit Widgets</strong>.</li>
+                <li>Search for <strong>{site.name}</strong>.</li>
+                <li>Drag the Small, Medium or Large size onto your desktop or into Notification Center, then click <strong>Done</strong>.</li>
+              </ol>
+            </li>
+
+            <li class="step">
+              <h3>Keep it updating</h3>
+              <p>
+                The widget refreshes from the menu-bar app, so keep it running. In <strong>Settings</strong>,
+                turn on <strong>Launch at login</strong>. You can turn off USB debugging on your phone now.
+              </p>
+              <p>Sessions last about three months. When the widget says <strong>Session expired</strong>, run the helper script again.</p>
+            </li>
+          </ol>
+
+          <div class="legend">
+            <h3>Reading the widget</h3>
+            <dl>
+              <div><dt>Parked</dt><dd>Online, ignition off, not charging.</dd></div>
+              <div><dt>Ignition on</dt><dd>The scooter is switched on.</dd></div>
+              <div><dt>Charging</dt><dd>Plugged in, with the time to full when the scooter reports one.</dd></div>
+              <div><dt>Fully charged</dt><dd>Done — you can unplug.</dd></div>
+              <div><dt>Asleep</dt><dd>No new reading for 30 minutes. Normal after the scooter has been parked a while; the last known values stay on screen.</dd></div>
+              <div><dt>Session expired</dt><dd>Run the helper script again to reconnect.</dd></div>
+            </dl>
+          </div>
+
+          <h3 class="faq-title">Troubleshooting</h3>
+          <div class="faq">
+            <details class="disclose">
+              <summary>macOS says the app can't be opened or is damaged</summary>
+              <div class="disclose-body"><p>Use <strong>System Settings &rsaquo; Privacy &amp; Security &rsaquo; Open Anyway</strong>, as in step 2. If you downloaded with a browser that marks files as damaged, you can also clear the quarantine flag:</p><Code cmd="xattr -dr com.apple.quarantine '/Applications/iQube Companion.app'" /></div>
+            </details>
+            <details class="disclose">
+              <summary>The script says "No phone found" or "not authorised"</summary>
+              <div class="disclose-body"><p>Unlock the phone and accept the USB debugging prompt. If no prompt appears, try another cable (some only charge) or switch the phone's USB mode to File transfer.</p></div>
+            </details>
+            <details class="disclose">
+              <summary>The script times out waiting for the values</summary>
+              <div class="disclose-body"><p>The values are only written once the TVS Connect dashboard has fully loaded. Keep the phone unlocked and on the dashboard, then run the script again.</p></div>
+            </details>
+            <details class="disclose">
+              <summary>The widget shows old values</summary>
+              <div class="disclose-body"><p>Check that the scooter icon is in your menu bar. Your scooter may be asleep — it reports again when you switch it on or plug it in. Click <strong>Reconnect</strong> in the menu-bar panel to force a refresh.</p></div>
+            </details>
+            <details class="disclose">
+              <summary>macOS asks for the Keychain password</summary>
+              <div class="disclose-body"><p>Click <strong>Always Allow</strong>. {site.name} is asking for its own saved session, and will not ask again.</p></div>
+            </details>
+            <details class="disclose">
+              <summary>How do I uninstall it?</summary>
+              <div class="disclose-body"><p>Click <strong>Sign out</strong> in Settings to delete your session from the Keychain, quit the app from the menu-bar panel, then delete it from Applications and remove its data folder:</p><Code cmd="rm -rf ~/Library/Application\ Support/TVSConnectWidget" /></div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRIVACY -->
+      <section class="section" id="privacy" aria-labelledby="privacy-title">
+        <div class="wrap narrow">
+          <p class="kicker">Privacy</p>
+          <h2 id="privacy-title">Your data stays on your Mac.</h2>
+          <ul class="checks">
+            <li><strong>Keychain only.</strong> Your TVS session is stored in the macOS Keychain. It is never written to a file or logged.</li>
+            <li><strong>Talks only to TVS.</strong> The app connects to <code>tvsiqubeapi.tvsmotor.com</code> and <code>p360.tvsmotor.com</code> and nothing else. No analytics, no tracking, no servers operated by this project.</li>
+            <li><strong>Sandboxed widget.</strong> The widget has no network access. It can only read the latest reading saved by the app.</li>
+            <li><strong>No location.</strong> Location data received from TVS is never stored or shown.</li>
+            <li><strong>Open source.</strong> The code is {site.license} licensed, so you can check all of this yourself.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- DISCLAIMER -->
+      <section class="section disclaimer-section" id="disclaimer" aria-labelledby="disclaimer-title">
+        <div class="wrap narrow">
+          <div class="disclaimer">
+            <div class="disclaimer-head">
+              <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+              <h2 id="disclaimer-title">Disclaimer</h2>
+            </div>
+            <p class="disclaimer-lead">Please read this before downloading or using {site.name}.</p>
+            <ol class="disclaimer-list">
+              <li><strong>Unofficial and independent.</strong> {site.name} is an independent hobby project. It is not affiliated with, endorsed by, sponsored by, or supported by TVS Motor Company or any of its subsidiaries.</li>
+              <li><strong>Trademarks.</strong> "TVS", "TVS Connect", "iQube" and "Orbiter" are trademarks of TVS Motor Company. They are used here only to describe which vehicles the app works with.</li>
+              <li><strong>Undocumented services.</strong> The app relies on the same online services as the official TVS Connect app. These are not public, and TVS may change, restrict or shut them off at any time, which could stop the app from working without notice.</li>
+              <li><strong>Your own account and vehicle only.</strong> Use the app only with your own TVS account and a vehicle registered to you. Do not use it to access anyone else's account, vehicle or data.</li>
+              <li><strong>Terms of service.</strong> Using third-party software with your TVS account may be against TVS Connect's terms of use. You are responsible for reviewing those terms and for any consequences, including restriction of your account.</li>
+              <li><strong>Information may be wrong or out of date.</strong> Battery, range and charging figures come from your scooter and TVS's servers and may be delayed, estimated or inaccurate. Do not rely on them for safety-critical decisions or trip planning.</li>
+              <li><strong>Never use it while riding.</strong> Do not look at or operate the app, your phone or your Mac while riding.</li>
+              <li><strong>Protect your session.</strong> The session values give access to your scooter's data, including its location. Never share them, post them online, or include them in screenshots or bug reports.</li>
+              <li><strong>No warranty.</strong> The software is provided "as is", without warranty of any kind, under the {site.license} License. The author is not liable for any claim, damages or other liability arising from its use, including damage to your vehicle, account or devices.</li>
+            </ol>
+            <p class="disclaimer-foot">By downloading or using {site.name}, you confirm that you have read and accept this disclaimer.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="wrap footer-inner">
+        <div class="footer-brand">
+          <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="/images/logo-dark.png" />
+            <img src="/images/logo-light.png" alt="" width="36" height="36" />
+          </picture>
+          <div>
+            <p class="footer-name">{site.name}</p>
+            <p class="footer-love">Made with <span class="heart" aria-label="love">❤️</span> by {site.author}</p>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <a href={site.repo} rel="noopener">Source on GitHub</a>
+          <a href="#setup">Setup guide</a>
+          <a href="#disclaimer">Disclaimer</a>
+          <a href={site.licenseUrl} class="badge" rel="noopener" aria-label={`License: ${site.license}`}>
+            <span class="badge-k">license</span><span class="badge-v">{site.license}</span>
+          </a>
+        </div>
+      </div>
+      <div class="wrap footer-legal">
+        <p>
+          {site.name} is an unofficial, independent project and is not affiliated with, endorsed by, or supported by
+          TVS Motor Company. TVS, TVS Connect, iQube and Orbiter are trademarks of TVS Motor Company, used only to
+          describe compatibility. Provided as is, without warranty. <a href="#disclaimer">Full disclaimer</a>.
+        </p>
+        <p>&copy; {site.year} {site.author}. Released under the <a href={site.licenseUrl} rel="noopener">{site.license} License</a>.</p>
+      </div>
+    </footer>
+
+    <!-- DOWNLOAD DIALOG: disclaimer must be accepted first -->
+    <dialog class="dl" id="download-dialog" aria-labelledby="dl-title">
+      <form method="dialog" class="dl-inner">
+        <div class="dl-head">
+          <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="/images/logo-dark.png" />
+            <img src="/images/logo-light.png" alt="" width="56" height="56" />
+          </picture>
+          <div>
+            <h2 id="dl-title">Download {site.name}</h2>
+            <p>Version {site.version} &middot; {site.dmgSize} &middot; {site.minMacOS}</p>
+          </div>
+          <button class="dl-close" value="close" aria-label="Close">&times;</button>
+        </div>
+
+        <div class="dl-warn">
+          <p><strong>Before you download</strong></p>
+          <ul>
+            <li>This is an <strong>unofficial</strong> app, not affiliated with or endorsed by TVS Motor Company.</li>
+            <li>It uses undocumented TVS services that may change or stop working at any time.</li>
+            <li>Use it only with your own account and vehicle. It may be against TVS Connect's terms of use.</li>
+            <li>Figures may be inaccurate. Never use the app while riding.</li>
+            <li>Provided as is, with no warranty, under the {site.license} License.</li>
+          </ul>
+          <a href="#disclaimer" class="dl-full" data-close-download>Read the full disclaimer</a>
+        </div>
+
+        <label class="dl-check">
+          <input type="checkbox" id="dl-accept" />
+          <span>I have read and accept the disclaimer.</span>
+        </label>
+
+        <a class="btn btn-primary dl-go" id="dl-go" href={site.dmg} download aria-disabled="true" tabindex="-1">
+          Download DMG
+        </a>
+        <p class="dl-sha">SHA-256 <code>{site.dmgSha256}</code></p>
+      </form>
+    </dialog>
+
+    <script>
+      // Download dialog: the DMG link only works after the disclaimer is accepted.
+      const dialog = document.getElementById("download-dialog") as HTMLDialogElement;
+      const accept = document.getElementById("dl-accept") as HTMLInputElement;
+      const go = document.getElementById("dl-go") as HTMLAnchorElement;
+      const setEnabled = (on: boolean) => {
+        go.setAttribute("aria-disabled", String(!on));
+        go.tabIndex = on ? 0 : -1;
+      };
+      document.querySelectorAll("[data-open-download]").forEach((el) =>
+        el.addEventListener("click", () => {
+          accept.checked = false;
+          setEnabled(false);
+          dialog.showModal();
+        })
+      );
+      accept.addEventListener("change", () => setEnabled(accept.checked));
+      go.addEventListener("click", (e) => {
+        if (!accept.checked) { e.preventDefault(); accept.focus(); return; }
+        setTimeout(() => dialog.close(), 300);
+      });
+      document.querySelectorAll("[data-close-download]").forEach((el) =>
+        el.addEventListener("click", () => dialog.close())
+      );
+      dialog.addEventListener("click", (e) => { if (e.target === dialog) dialog.close(); });
+
+      // Copy buttons on commands.
+      document.querySelectorAll<HTMLButtonElement>("button.copy").forEach((btn) =>
+        btn.addEventListener("click", async () => {
+          try {
+            await navigator.clipboard.writeText(btn.dataset.copy ?? "");
+            btn.textContent = "Copied";
+          } catch {
+            btn.textContent = "Press ⌘C";
+          }
+          setTimeout(() => (btn.textContent = "Copy"), 1600);
+        })
+      );
+    </script>
+  </body>
+</html>

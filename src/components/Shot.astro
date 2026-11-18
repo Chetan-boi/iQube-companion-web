@@ -1,0 +1,21 @@
+---
+// A screenshot that follows the visitor's light/dark preference.
+interface Props {
+  name: string;           // e.g. "widget-medium" -> /images/widget-medium-{light,dark}.png
+  alt: string;
+  width: number;          // display width in CSS px (images are 2x)
+  class?: string;
+  eager?: boolean;
+}
+const { name, alt, width, class: cls = "", eager = false } = Astro.props;
+---
+<picture class={`shot ${cls}`}>
+  <source media="(prefers-color-scheme: dark)" srcset={`/images/${name}-dark.png`} />
+  <img
+    src={`/images/${name}-light.png`}
+    alt={alt}
+    width={width}
+    loading={eager ? "eager" : "lazy"}
+    decoding="async"
+  />
+</picture>
