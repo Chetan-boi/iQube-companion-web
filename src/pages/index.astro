@@ -17,7 +17,18 @@ import Code from "../components/Code.astro";
     <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
     <meta property="og:title" content={`${site.name} — ${site.tagline}`} />
     <meta property="og:description" content={site.description} />
-    <meta property="og:image" content="/images/widget-medium-dark.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={site.url + "/"} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:image" content={site.url + "/og.png"} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="iQube Companion widget showing 75% battery, Eco 86 km, City 73 km, charging" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${site.name} — ${site.tagline}`} />
+    <meta name="twitter:description" content={site.description} />
+    <meta name="twitter:image" content={site.url + "/og.png"} />
+    <link rel="canonical" href={site.url + "/"} />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />

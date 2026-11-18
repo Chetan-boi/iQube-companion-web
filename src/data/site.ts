@@ -10,10 +10,11 @@ export const site = {
   dmgSize: "5.2 MB",
   dmgSha256: "e86ba80a992d076718a31ce6fe4d811d139e0498e4a5de4eeb71babc4c0db1f4",
   sessionScript: "/downloads/get_token_session.sh",
-  // The app repository. It is private right now: make it public, or change these links, before hosting.
+  // The app repository (public).
   repo: "https://github.com/Chetan-boi/iQube-companion",
   license: "MIT",
   licenseUrl: "https://github.com/Chetan-boi/iQube-companion/blob/main/LICENSE",
+  url: "https://iqube-companion.chetan140209.workers.dev",
   author: "Chetan",
   year: 2026,
 };

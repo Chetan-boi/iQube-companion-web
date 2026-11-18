@@ -31,11 +31,3 @@ lines of script for the download dialog and the copy buttons.
 3. Update `version`, `dmg`, `dmgSize` and `dmgSha256` in `src/data/site.ts`
    (`shasum -a 256 public/downloads/iQube-Companion-X.Y.dmg`).
 4. `npm run build` and deploy `dist/`.
-
-## Before hosting
-
-- **Repo links:** the app repository is private. Make it public, or change `repo` and `licenseUrl` in `src/data/site.ts`.
-- **Download hosting:** the DMG is served from this site. For larger files or download counts, host it on
-  GitHub Releases and point `dmg` at the release asset URL.
-- **Disclaimer:** visitors must accept it in the download dialog before the DMG link works. Keep it in
-  place: it is the main protection for an unofficial app.
