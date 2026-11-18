@@ -28,12 +28,6 @@ import Code from "../components/Code.astro";
   <body>
     <a class="skip" href="#main">Skip to content</a>
 
-    <!-- Unofficial notice: always visible at the very top -->
-    <div class="notice-bar" role="note">
-      <span><strong>Unofficial.</strong> Not affiliated with or endorsed by TVS Motor Company.</span>
-      <a href="#disclaimer">Read the disclaimer</a>
-    </div>
-
     <header class="nav">
       <div class="wrap nav-inner">
         <a href="#top" class="brand" aria-label={`${site.name} home`}>
@@ -61,7 +55,7 @@ import Code from "../components/Code.astro";
             <source media="(prefers-color-scheme: dark)" srcset="/images/logo-dark.png" />
             <img src="/images/logo-light.png" alt={`${site.name} app icon`} width="112" height="112" />
           </picture>
-          <p class="eyebrow">Free &middot; {site.license} licensed &middot; macOS 14+</p>
+          <p class="eyebrow">{site.license} licensed &middot; macOS 14+</p>
           <h1>Your scooter,<br />on your desktop.</h1>
           <p class="lede">
             {site.name} is a native menu-bar app and widget for TVS electric scooters.
@@ -92,7 +86,6 @@ import Code from "../components/Code.astro";
               <Shot name="menu" alt="" width={340} class="desk-menu" eager />
             </div>
           </div>
-          <p class="caption">Real readings from a TVS Orbiter while charging.</p>
         </div>
       </section>
 
