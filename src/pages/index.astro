@@ -70,7 +70,7 @@ import Code from "../components/Code.astro";
           <h1>Your scooter,<br />on your desktop.</h1>
           <p class="lede">
             {site.name} is a native menu-bar app and widget for TVS electric scooters.
-            Battery, charging and range, live and at a glance — without reaching for your phone.
+            See how much charge you have, how far it'll take you, and when it'll be full — without reaching for your phone.
           </p>
           <div class="cta-row">
             <button class="btn btn-primary" type="button" data-open-download>
@@ -83,20 +83,34 @@ import Code from "../components/Code.astro";
         </div>
 
         <div class="wrap">
-          <div class="desk" role="img" aria-label="The iQube Companion widget and menu-bar panel on a Mac desktop">
-            <div class="desk-menubar">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              <span class="desk-status">
-                <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>
-                75%
-              </span>
-            </div>
-            <div class="desk-stage">
-              <Shot name="widget-medium" alt="" width={388} class="desk-medium" eager />
-              <Shot name="widget-small" alt="" width={194} class="desk-small" eager />
-              <Shot name="menu" alt="" width={340} class="desk-menu" eager />
-            </div>
-          </div>
+          <!--
+            Hero film: a seamless 14 s loop of the product scenes (the page already has the title and download,
+            so the film's own intro and end card are cut). Two videos: 16:9 for wide screens, 9:16 for phones.
+            Only the visible one ever loads; sources are attached by script when it scrolls near the viewport.
+          -->
+          <figure class="film" data-film aria-label="iQube Companion in action: widgets and the menu-bar panel showing live battery, range and charging">
+            <video class="film-video film-wide" muted playsinline loop preload="none" disablepictureinpicture
+              width="1920" height="1080"
+              data-start="2.5"
+              data-sources={JSON.stringify([
+                { src: "/media/hero-16x9.av1.mp4",  type: 'video/mp4; codecs="av01.0.09M.10"' },
+                { src: "/media/hero-16x9.hevc.mp4", type: 'video/mp4; codecs="hvc1.2.4.L123.B0"' },
+                { src: "/media/hero-16x9.h264.mp4", type: 'video/mp4; codecs="avc1.64002A"' },
+              ])}></video>
+            <video class="film-video film-tall" muted playsinline loop preload="none" disablepictureinpicture
+              width="1080" height="1920"
+              data-start="2.5"
+              data-sources={JSON.stringify([
+                { src: "/media/hero-9x16.av1.mp4",  type: 'video/mp4; codecs="av01.0.09M.10"' },
+                { src: "/media/hero-9x16.hevc.mp4", type: 'video/mp4; codecs="hvc1.2.4.L123.B0"' },
+                { src: "/media/hero-9x16.h264.mp4", type: 'video/mp4; codecs="avc1.64002A"' },
+              ])}></video>
+            <button class="film-toggle" type="button" data-film-toggle aria-label="Pause video" hidden>
+              <svg class="i-pause" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+              <svg class="i-play" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>
+            </button>
+          </figure>
+          <p class="caption">Rendered from the app's real widgets, with real readings from a TVS Orbiter while charging.</p>
         </div>
       </section>
 
@@ -117,8 +131,8 @@ import Code from "../components/Code.astro";
 
             <article class="tile">
               <span class="big">1&thinsp;h 55&thinsp;min</span>
-              <h3>Knows when you're charging.</h3>
-              <p>Time to full, straight from the scooter, and a nudge to unplug when it's done.</p>
+              <h3>Time to full, to the minute.</h3>
+              <p>Straight from the scooter while it charges, plus a nudge to unplug once it's done.</p>
             </article>
 
             <article class="tile">
@@ -126,8 +140,8 @@ import Code from "../components/Code.astro";
                 <div><span class="range-mode">Eco</span><span class="range-km">86<small>km</small></span></div>
                 <div><span class="range-mode">City</span><span class="range-km">73<small>km</small></span></div>
               </div>
-              <h3>Range for every mode.</h3>
-              <p>Whatever riding modes your scooter reports, each with its own estimate.</p>
+              <h3>How far you can go.</h3>
+              <p>An estimate for each riding mode your scooter reports, side by side.</p>
             </article>
 
             <article class="tile">
@@ -135,8 +149,8 @@ import Code from "../components/Code.astro";
                 <div class="pack"><span>A</span><i style="--v:75.4%"></i><b>75.4%</b></div>
                 <div class="pack"><span>B</span><i style="--v:74.7%"></i><b>74.7%</b></div>
               </div>
-              <h3>Battery, pack by pack.</h3>
-              <p>Overall charge plus each removable pack, to one decimal place.</p>
+              <h3>Both packs, to the decimal.</h3>
+              <p>Overall charge plus each removable battery on its own.</p>
             </article>
 
             <article class="tile">
@@ -146,16 +160,16 @@ import Code from "../components/Code.astro";
             </article>
             <article class="tile tile-wide">
               <div class="tile-copy">
-                <h3>Lives in your menu bar.</h3>
-                <p>Your charge level sits next to the clock. Click it for the full picture, reconnect, or open Settings. No Dock icon, no window to manage.</p>
+                <h3>One click from the clock.</h3>
+                <p>Your charge sits in the menu bar. Click it for the full picture, reconnect, or open Settings. No Dock icon, no window to manage.</p>
               </div>
               <Shot name="menu" alt="Menu-bar panel with battery, packs and ranges" width={300} class="tile-shot" />
             </article>
 
             <article class="tile">
               <div class="sizes" aria-hidden="true"><span class="sz s"></span><span class="sz m"></span><span class="sz l"></span></div>
-              <h3>Small, medium, large.</h3>
-              <p>Pick the size that fits your desktop or Notification Center.</p>
+              <h3>Fits your desktop.</h3>
+              <p>Three widget sizes, for the desktop or Notification Center.</p>
             </article>
 
             <article class="tile">
@@ -457,6 +471,82 @@ import Code from "../components/Code.astro";
           setTimeout(() => (btn.textContent = "Copy"), 1600);
         })
       );
+
+      // Hero film -----------------------------------------------------------
+      // - Only the video that matches the current layout (16:9 or 9:16) is ever loaded.
+      // - Sources are attached when the film nears the viewport; the browser picks AV1 → HEVC → H.264.
+      // - Playback starts on the poster frame (data-start), so there's no flash when it kicks in.
+      // - Pauses when scrolled away or the tab is hidden; no autoplay with "Reduce motion".
+      const film = document.querySelector<HTMLElement>("[data-film]");
+      if (film) {
+        const toggle = film.querySelector<HTMLButtonElement>("[data-film-toggle]")!;
+        const wide = film.querySelector<HTMLVideoElement>(".film-wide")!;
+        const tall = film.querySelector<HTMLVideoElement>(".film-tall")!;
+        const phone = window.matchMedia("(max-width: 720px)");
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+        let inView = false;
+        let userPaused = reduceMotion.matches;
+
+        const current = () => (phone.matches ? tall : wide);
+        const other = () => (phone.matches ? wide : tall);
+
+        const attach = (v: HTMLVideoElement) => {
+          if (v.dataset.attached) return;
+          v.dataset.attached = "1";
+          for (const s of JSON.parse(v.dataset.sources ?? "[]") as { src: string; type: string }[]) {
+            if (!v.canPlayType(s.type)) continue;
+            const el = document.createElement("source");
+            el.src = s.src; el.type = s.type;
+            v.appendChild(el);
+          }
+          v.preload = "auto";
+          const start = Number(v.dataset.start ?? 0);
+          v.addEventListener("loadedmetadata", () => { if (start && v.currentTime === 0) v.currentTime = start; }, { once: true });
+          v.load();
+        };
+
+        const render = () => {
+          const v = current();
+          other().pause();
+          const shouldPlay = inView && !userPaused && !document.hidden;
+          if (shouldPlay) {
+            attach(v);
+            v.play().catch((err: DOMException) => {
+              // AbortError just means a pause() interrupted play() (scrolling, tab switch): harmless.
+              // NotAllowedError means the browser blocked autoplay: keep the poster and offer the button.
+              if (err?.name === "NotAllowedError") { userPaused = true; sync(); }
+            });
+          } else {
+            v.pause();
+          }
+          sync();
+        };
+
+        const sync = () => {
+          const playing = !userPaused && inView;
+          film.classList.toggle("is-paused", !playing);
+          toggle.setAttribute("aria-label", playing ? "Pause video" : "Play video");
+          toggle.hidden = false;
+        };
+
+        toggle.addEventListener("click", () => { userPaused = !userPaused; render(); });
+
+        // 1) Start fetching a little before the film reaches the screen, so playback is instant.
+        new IntersectionObserver(
+          (entries) => { if (entries.some((e) => e.isIntersecting) && !userPaused) attach(current()); },
+          { rootMargin: "300px 0px" }
+        ).observe(film);
+        // 2) Play only while at least a quarter of it is actually visible.
+        new IntersectionObserver(
+          (entries) => { inView = entries[entries.length - 1].intersectionRatio >= 0.25; render(); },
+          { threshold: [0, 0.25] }
+        ).observe(film);
+
+        document.addEventListener("visibilitychange", render);
+        phone.addEventListener("change", render);
+        reduceMotion.addEventListener("change", () => { userPaused = reduceMotion.matches; render(); });
+        sync();
+      }
     </script>
   </body>
 </html>

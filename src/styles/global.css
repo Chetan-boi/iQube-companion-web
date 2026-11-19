@@ -132,42 +132,50 @@ h1, h2, h3 { margin: 0; letter-spacing: -0.025em; line-height: 1.08; font-weight
 .cta-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 38px; }
 .meta { margin-top: 18px; font-size: 13px; color: var(--text-3); }
 
-/* Desktop mock */
-.desk {
-  position: relative; margin: 72px auto 0; max-width: 1000px; border-radius: 26px; overflow: hidden;
+/* Hero film */
+.film {
+  position: relative; margin: 72px auto 0; max-width: 1000px;
+  aspect-ratio: 16 / 9;                      /* space reserved before anything loads: no layout shift */
+  border-radius: 26px; overflow: hidden; isolation: isolate;
   border: 1px solid var(--line);
-  background:
-    radial-gradient(1200px 500px at 15% 0%, #1b6cff 0%, transparent 55%),
-    radial-gradient(900px 600px at 100% 100%, #10b89a 0%, transparent 55%),
-    linear-gradient(135deg, #0b1a3a, #07101f 60%, #062420);
+  /* Poster as a CSS background: only the one for the current layout downloads, and it is the exact
+     frame playback starts on, so the switch to video is invisible. */
+  background: #050b17 url("/media/hero-16x9-poster.webp") center / cover no-repeat;
   box-shadow: var(--shadow);
+  contain: layout paint;
 }
-@media (prefers-color-scheme: light) {
-  .desk {
-    background:
-      radial-gradient(1200px 500px at 15% 0%, #9cc8ff 0%, transparent 55%),
-      radial-gradient(900px 600px at 100% 100%, #9ff0dc 0%, transparent 55%),
-      linear-gradient(135deg, #e9f1ff, #eef6ff 60%, #e7fbf5);
+.film-video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block; background: transparent;
+}
+.film-tall { display: none; }
+.film-toggle {
+  position: absolute; right: 14px; bottom: 14px; z-index: 2;
+  width: 34px; height: 34px; border-radius: 50%; border: 0; cursor: pointer;
+  display: grid; place-items: center; color: #fff;
+  background: rgba(0, 0, 0, .42);
+  backdrop-filter: blur(12px) saturate(160%); -webkit-backdrop-filter: blur(12px) saturate(160%);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.18);
+  opacity: 0; transition: opacity .2s ease, transform .15s ease;
+}
+.film:hover .film-toggle, .film-toggle:focus-visible, .film.is-paused .film-toggle { opacity: 1; }
+.film-toggle:active { transform: scale(.94); }
+.film-toggle .i-play { display: none; }
+.film.is-paused .film-toggle .i-play { display: block; }
+.film.is-paused .film-toggle .i-pause { display: none; }
+@media (hover: none) { .film-toggle { opacity: 1; } }
+@media (max-width: 720px) {
+  .film {
+    aspect-ratio: 9 / 16;
+    background-image: url("/media/hero-9x16-poster.webp");
+    width: min(100%, calc(78svh * 9 / 16));   /* keep the whole film on one phone screen */
+    margin-top: 48px; border-radius: 22px;
   }
+  .film-wide { display: none; }
+  .film-tall { display: block; }
 }
-.desk-menubar {
-  display: flex; align-items: center; gap: 7px; height: 30px; padding: 0 14px;
-  background: rgba(255,255,255,.16); backdrop-filter: blur(10px); color: #fff; font-size: 12px; font-weight: 600;
-}
-@media (prefers-color-scheme: light) { .desk-menubar { background: rgba(255,255,255,.55); color: #111; } }
-.desk-menubar .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.5); }
-@media (prefers-color-scheme: light) { .desk-menubar .dot { background: rgba(0,0,0,.2); } }
-.desk-status { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 6px; background: rgba(255,255,255,.2); }
-@media (prefers-color-scheme: light) { .desk-status { background: rgba(0,0,0,.08); } }
-.desk-stage {
-  display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto auto; gap: 18px 28px;
-  padding: 40px 44px 48px; align-items: start; text-align: left;
-}
-.desk-medium { grid-column: 1; grid-row: 1; justify-self: start; }
-.desk-small { grid-column: 1; grid-row: 2; justify-self: start; }
-.desk-menu { grid-column: 2; grid-row: 1 / span 2; justify-self: end; margin-top: -30px; }
 .shot img { filter: drop-shadow(0 14px 30px rgba(0,0,0,.28)); }
-.caption { margin-top: 16px; font-size: 13px; color: var(--text-3); text-align: center; }
+.caption { margin: 16px auto 0; max-width: 560px; font-size: 13px; color: var(--text-3); text-align: center; }
 
 /* ---------- Sections ---------- */
 .section { padding: 128px 0; }
@@ -337,9 +345,6 @@ h1, h2, h3 { margin: 0; letter-spacing: -0.025em; line-height: 1.08; font-weight
   .bento { grid-template-columns: repeat(2, 1fr); }
   .tile-hero { grid-column: span 2; grid-row: span 1; }
   .tile-wide { grid-column: span 2; }
-  .desk-stage { grid-template-columns: 1fr; padding: 28px; }
-  .desk-menu { grid-column: 1; grid-row: auto; justify-self: center; margin-top: 0; }
-  .desk-medium, .desk-small { justify-self: center; }
 }
 @media (max-width: 720px) {
   .nav-links { display: none; }
